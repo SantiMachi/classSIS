@@ -91,15 +91,13 @@ class EditClassHandler {
             this.showLoading();
             
             // Load class data and instructors in parallel
-            const [classData, instructors] = await Promise.all([
+            const [classData] = await Promise.all([
                 this.fetchClass(this.classId),
-                this.fetchInstructors()
             ]);
 
             if (classData) {
                 this.currentClass = classData;
                 this.populateForm(classData);
-                this.populateInstructors(instructors);
                 this.showForm();
             } else {
                 this.showError('Clase no encontrada');
@@ -114,32 +112,8 @@ class EditClassHandler {
 
     async fetchClass(classId) {
         // Simulate API call - GET /classes/{class_id}
-        const mockClasses = [
-            {
-                id: 1,
-                name: "Yoga Matutino",
-                description: "Clase de yoga relajante para empezar el día",
-                instructor_id: 1,
-                max_capacity: 20,
-                schedule_date: "2025-05-27",
-                schedule_time: "08:00",
-                duration_minutes: 60,
-                status: "active",
-                enrolled_count: 15
-            },
-            {
-                id: 2,
-                name: "Pilates Avanzado",
-                description: "Clase intensiva de pilates",
-                instructor_id: 2,
-                max_capacity: 15,
-                schedule_date: "2025-05-28",
-                schedule_time: "19:00",
-                duration_minutes: 45,
-                status: "active",
-                enrolled_count: 8
-            }
-        ];
+        const respuesta = await fetch('http://localhost:8000/classes/'); // Reemplaza con tu URL
+        const mockClasses = await respuesta.json();
 
         return mockClasses.find(c => c.id == classId);
 
@@ -159,20 +133,10 @@ class EditClassHandler {
         */
     }
 
-    async fetchInstructors() {
-        // Simulate API call
-        return [
-            { id: 1, name: 'Ana Martínez - Yoga' },
-            { id: 2, name: 'Carlos López - Pilates' },
-            { id: 3, name: 'Laura Sánchez - Fitness' },
-            { id: this.user.id, name: `${this.user.name} (Tú)` }
-        ];
-    }
 
     populateForm(classData) {
         document.getElementById('name').value = classData.name;
         document.getElementById('description').value = classData.description;
-        document.getElementById('instructor_id').value = classData.instructor_id;
         document.getElementById('schedule_date').value = classData.schedule_date;
         document.getElementById('schedule_time').value = classData.schedule_time;
         document.getElementById('duration_minutes').value = classData.duration_minutes;
@@ -183,18 +147,6 @@ class EditClassHandler {
         this.validateCapacity();
     }
 
-    populateInstructors(instructors) {
-        const select = document.getElementById('instructor_id');
-        select.innerHTML = '<option value="">Selecciona un instructor</option>' +
-            instructors.map(instructor => 
-                `<option value="${instructor.id}">${instructor.name}</option>`
-            ).join('');
-        
-        // Restore selected value
-        if (this.currentClass) {
-            select.value = this.currentClass.instructor_id;
-        }
-    }
 
     validateCapacity() {
         const maxCapacity = parseInt(document.getElementById('max_capacity').value);
@@ -231,7 +183,6 @@ class EditClassHandler {
         const classData = {
             name: formData.get('name'),
             description: formData.get('description'),
-            instructor_id: parseInt(formData.get('instructor_id')),
             schedule_date: formData.get('schedule_date'),
             schedule_time: formData.get('schedule_time'),
             duration_minutes: parseInt(formData.get('duration_minutes')),
@@ -278,11 +229,6 @@ class EditClassHandler {
             isValid = false;
         }
 
-        // Validar instructor
-        if (!data.instructor_id) {
-            this.showFieldError('instructor_id', 'Selecciona un instructor');
-            isValid = false;
-        }
 
         // Validar fecha
         if (!data.schedule_date) {
@@ -325,24 +271,10 @@ class EditClassHandler {
     }
 
     async updateClass(classId, classData) {
-        // Simulate API call - PUT /classes/{class_id}
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    success: true,
-                    data: {
-                        id: parseInt(classId),
-                        ...classData,
-                        enrolled_count: this.currentClass.enrolled_count,
-                        updated_at: new Date().toISOString()
-                    }
-                });
-            }, 1000);
-        });
 
         // Real API call:
-        /*
-        const response = await fetch(`${this.apiBaseUrl}/classes/${classId}`, {
+        
+        const response = await fetch(`http://localhost:8000/classes/${classId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -357,7 +289,7 @@ class EditClassHandler {
         }
 
         return await response.json();
-        */
+        
     }
 
     handleUpdateSuccess(data) {
@@ -377,7 +309,6 @@ class EditClassHandler {
         return (
             formData.get('name') !== this.currentClass.name ||
             formData.get('description') !== this.currentClass.description ||
-            parseInt(formData.get('instructor_id')) !== this.currentClass.instructor_id ||
             formData.get('schedule_date') !== this.currentClass.schedule_date ||
             formData.get('schedule_time') !== this.currentClass.schedule_time ||
             parseInt(formData.get('duration_minutes')) !== this.currentClass.duration_minutes ||

@@ -22,7 +22,6 @@ class CreateClassHandler {
 
     init() {
         this.setupEventListeners();
-        this.loadInstructors();
         this.setMinDate();
     }
 
@@ -66,32 +65,8 @@ class CreateClassHandler {
         document.getElementById('schedule_date').min = today;
     }
 
-    async loadInstructors() {
-        try {
-            const instructors = await this.fetchInstructors();
-            const select = document.getElementById('instructor_id');
-            
-            select.innerHTML = '<option value="">Selecciona un instructor</option>' +
-                instructors.map(instructor => 
-                    `<option value="${instructor.id}">${instructor.name}</option>`
-                ).join('');
-                
-        } catch (error) {
-            console.error('Error loading instructors:', error);
-            this.showMessage('Error cargando la lista de instructores', 'error');
-        }
-    }
+    
 
-    async fetchInstructors() {
-        // Simulate API call to get instructors
-        // In real implementation: GET /users?role=admin or /instructors
-        return [
-            { id: 1, name: 'Ana Martínez - Yoga' },
-            { id: 2, name: 'Carlos López - Pilates' },
-            { id: 3, name: 'Laura Sánchez - Fitness' },
-            { id: this.user.id, name: `${this.user.name} (Tú)` }
-        ];
-    }
 
     async handleCreateClass(e) {
         e.preventDefault();
@@ -100,7 +75,6 @@ class CreateClassHandler {
         const classData = {
             name: formData.get('name'),
             description: formData.get('description'),
-            instructor_id: parseInt(formData.get('instructor_id')),
             schedule_date: formData.get('schedule_date'),
             schedule_time: formData.get('schedule_time'),
             duration_minutes: parseInt(formData.get('duration_minutes')),
@@ -144,12 +118,6 @@ class CreateClassHandler {
         // Validar descripción
         if (!data.description || data.description.trim().length < 10) {
             this.showFieldError('description', 'La descripción debe tener al menos 10 caracteres');
-            isValid = false;
-        }
-
-        // Validar instructor
-        if (!data.instructor_id) {
-            this.showFieldError('instructor_id', 'Selecciona un instructor');
             isValid = false;
         }
 
@@ -208,31 +176,10 @@ class CreateClassHandler {
     async createClass(classData) {
         // Simulate API call
         // Real implementation: POST /classes/
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                // Simulate some validation
-                if (classData.name.toLowerCase().includes('test')) {
-                    resolve({
-                        success: false,
-                        message: 'No se permiten clases de prueba'
-                    });
-                } else {
-                    resolve({
-                        success: true,
-                        data: {
-                            id: Math.floor(Math.random() * 1000) + 100,
-                            ...classData,
-                            enrolled_count: 0,
-                            created_at: new Date().toISOString()
-                        }
-                    });
-                }
-            }, 1500);
-        });
 
         // Real API call code:
-        /*
-        const response = await fetch(`${this.apiBaseUrl}/classes/`, {
+        
+        const response = await fetch(`http://localhost:8000/classes/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -247,7 +194,7 @@ class CreateClassHandler {
         }
 
         return await response.json();
-        */
+        
     }
 
     handleCreateSuccess(data) {

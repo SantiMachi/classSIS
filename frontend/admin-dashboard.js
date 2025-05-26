@@ -175,7 +175,7 @@ class AdminDashboard {
                     <p><strong>Capacidad:</strong> ${classItem.enrolled_count}/${classItem.max_capacity}</p>
                 </div>
                 <div class="class-actions">
-                    <button onclick="adminDashboard.editClass(${classItem.id})" class="edit-btn">Editar</button>
+                    <button onclick="adminDashboard.editClass('${classItem.id}')" class="edit-btn">Editar</button>
                     <button onclick="adminDashboard.deleteClass(${classItem.id})" class="delete-btn">Eliminar</button>
                     <button onclick="adminDashboard.viewClassInscriptions(${classItem.id})" class="view-btn">Ver Inscripciones</button>
                 </div>
@@ -317,7 +317,10 @@ class AdminDashboard {
     // API Methods
     async fetchClasses() {
         // Simulate API call
-        return [
+        const respuesta = await fetch('http://localhost:8000/classes/'); // Reemplaza con tu URL
+        const datos = await respuesta.json();
+        return datos;
+        /* return [
             {
                 id: 1,
                 name: "Yoga Matutino",
@@ -342,11 +345,15 @@ class AdminDashboard {
                 status: "active",
                 enrolled_count: 8
             }
-        ];
+        ]; */
     }
 
     async fetchInscriptions() {
         // Simulate API call
+
+        const respuesta = await fetch('http://localhost:8000/inscriptions/'); // Reemplaza con tu URL
+        const datos = await respuesta.json();
+        return datos;
         return [
             {
                 id: 1,
@@ -370,7 +377,9 @@ class AdminDashboard {
     }
 
     async fetchUsers() {
-        // Simulate API call
+        const respuesta = await fetch('http://localhost:8000/users/'); // Reemplaza con tu URL
+        const datos = await respuesta.json();
+        return datos;
         return [
             {
                 id: 1,
@@ -398,6 +407,8 @@ class AdminDashboard {
 
     // Action Methods
     editClass(classId) {
+        console.log(classId);
+        
         window.location.href = `edit-class.html?id=${classId}`;
     }
 
