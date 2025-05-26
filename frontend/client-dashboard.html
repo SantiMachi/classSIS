@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Cliente - Sistema de Clases</title>
+    <link rel="stylesheet" href="client-dashboard.css">
+</head>
+<body>
+    <nav>
+        <div>
+            <h1>Sistema de Clases</h1>
+            <div>
+                <span id="userName">Cliente</span>
+                <button onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <h2>Panel de Cliente</h2>
+            <p>Bienvenido, gestiona tus clases e inscripciones</p>
+        </header>
+
+        <div>
+            <!-- Stats Cards -->
+            <div>
+                <div>
+                    <h3>Clases Inscritas</h3>
+                    <p id="enrolledCount">0</p>
+                </div>
+                <div>
+                    <h3>Clases Completadas</h3>
+                    <p id="completedCount">0</p>
+                </div>
+                <div>
+                    <h3>Próximas Clases</h3>
+                    <p id="upcomingCount">0</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div>
+                <h3>Acciones Rápidas</h3>
+                <div class="action-buttons">
+                    <button onclick="goToAvailableClasses()">Explorar Clases</button>
+                    <button onclick="goToMyEnrollments()">Mis Inscripciones</button>
+                    <button onclick="goToProfile()">Mi Perfil</button>
+                </div>
+            </div>
+
+            <!-- Recent Enrollments -->
+            <div>
+                <h3>Inscripciones Recientes</h3>
+                <div id="recentEnrollments">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Upcoming Classes -->
+            <div>
+                <h3>Próximas Clases</h3>
+                <div id="upcomingClasses">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="client-dashboard.js"></script>
+</body>
+</html>

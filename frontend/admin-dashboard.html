@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <title>Panel de Administrador</title>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1>Panel de Administrador</h1>
+                <div class="user-info">
+                    <span id="userName">Cargando...</span>
+                    <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#classes" class="nav-link" data-section="classes">Gestionar Clases</a></li>
+                <li><a href="#inscriptions" class="nav-link" data-section="inscriptions">Ver Inscripciones</a></li>
+                <li><a href="#users" class="nav-link" data-section="users">Gestionar Usuarios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <h2>Resumen del Sistema</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total de Clases</h3>
+                        <span id="totalClasses" class="stat-number">-</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Clases Activas</h3>
+                        <span id="activeClasses" class="stat-number">-</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Inscripciones</h3>
+                        <span id="totalInscriptions" class="stat-number">-</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Usuarios Registrados</h3>
+                        <span id="totalUsers" class="stat-number">-</span>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Actividad Reciente</h3>
+                    <div id="recentActivity">
+                        <p>Cargando actividad reciente...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Classes Section -->
+            <section id="classes-section" class="content-section">
+                <div class="section-header">
+                    <h2>Gestión de Clases</h2>
+                    <button id="createClassBtn" class="create-btn">+ Nueva Clase</button>
+                </div>
+                
+                <div class="classes-list">
+                    <div id="classesContainer">
+                        <p>Cargando clases...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inscriptions Section -->
+            <section id="inscriptions-section" class="content-section">
+                <h2>Inscripciones</h2>
+                
+                <div class="filters">
+                    <select id="classFilter">
+                        <option value="">Todas las clases</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">Todos los estados</option>
+                        <option value="enrolled">Inscrito</option>
+                        <option value="cancelled">Cancelado</option>
+                    </select>
+                </div>
+                
+                <div id="inscriptionsContainer">
+                    <p>Cargando inscripciones...</p>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="content-section">
+                <h2>Gestión de Usuarios</h2>
+                
+                <div class="users-filters">
+                    <select id="roleFilter">
+                        <option value="">Todos los roles</option>
+                        <option value="admin">Administradores</option>
+                        <option value="client">Clientes</option>
+                    </select>
+                </div>
+                
+                <div id="usersContainer">
+                    <p>Cargando usuarios...</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner">Cargando...</div>
+        </div>
+
+        <!-- Messages -->
+        <div id="messageContainer" class="message-container" style="display: none;"></div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Clase</title>
+    <link rel="stylesheet" href="edit-class.css">
+</head>
+<body>
+    <div class="edit-class-container">
+        <header class="page-header">
+            <div class="header-content">
+                <h1>Editar Clase</h1>
+                <div class="header-actions">
+                    <a href="admin-dashboard.html" class="back-btn">← Volver al Dashboard</a>
+                    <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="edit-class-main">
+            <div id="loadingContainer" class="loading-container">
+                <p>Cargando datos de la clase...</p>
+            </div>
+
+            <form id="editClassForm" class="class-form" style="display: none;">
+                <div class="form-section">
+                    <h2>Información Básica</h2>
+                    
+                    <div class="form-group">
+                        <label for="name">Nombre de la clase:</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Descripción:</label>
+                        <textarea id="description" name="description" rows="4" required></textarea>
+                        <span class="error-message" id="descriptionError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instructor_id">Instructor:</label>
+                        <select id="instructor_id" name="instructor_id" required>
+                            <option value="">Selecciona un instructor</option>
+                        </select>
+                        <span class="error-message" id="instructor_idError"></span>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Horario y Capacidad</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="schedule_date">Fecha:</label>
+                            <input type="date" id="schedule_date" name="schedule_date" required>
+                            <span class="error-message" id="schedule_dateError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="schedule_time">Hora:</label>
+                            <input type="time" id="schedule_time" name="schedule_time" required>
+                            <span class="error-message" id="schedule_timeError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="duration_minutes">Duración (minutos):</label>
+                            <input type="number" id="duration_minutes" name="duration_minutes" min="15" max="180" step="15" required>
+                            <span class="error-message" id="duration_minutesError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="max_capacity">Capacidad máxima:</label>
+                            <input type="number" id="max_capacity" name="max_capacity" min="1" max="100" required>
+                            <span class="error-message" id="max_capacityError"></span>
+                            <small id="capacityWarning" class="capacity-warning" style="display: none;">
+                                ⚠️ Hay más personas inscritas que la nueva capacidad
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Estado e Información</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="status">Estado de la clase:</label>
+                            <select id="status" name="status" required>
+                                <option value="active">Activa</option>
+                                <option value="cancelled">Cancelada</option>
+                                <option value="completed">Completada</option>
+                            </select>
+                            <span class="error-message" id="statusError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Inscripciones actuales:</label>
+                            <div class="enrollment-info">
+                                <span id="enrolledCount">0</span> personas inscritas
+                                <button type="button" id="viewInscriptionsBtn" class="view-inscriptions-btn">
+                                    Ver inscripciones
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="cancel-btn">Cancelar</button>
+                    <button type="submit" id="saveBtn" class="save-btn">
+                        <span id="saveBtnText">Guardar Cambios</span>
+                        <span id="saveSpinner" class="spinner" style="display: none;">Guardando...</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="errorContainer" class="error-container" style="display: none;">
+                <p>Error cargando la clase. Verifica que el ID sea válido.</p>
+                <a href="admin-dashboard.html" class="back-link">Volver al dashboard</a>
+            </div>
+        </main>
+
+        <!-- Messages -->
+        <div id="messageContainer" class="message-container" style="display: none;"></div>
+    </div>
+
+    <script src="edit-class.js"></script>
+</body>
+</html>

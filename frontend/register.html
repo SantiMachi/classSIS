@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-form">
+            <h2>Crear Cuenta</h2>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="name">Nombre completo:</label>
+                    <input type="text" id="name" name="name" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar contraseña:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Tipo de cuenta:</label>
+                    <select id="role" name="role" required>
+                        <option value="">Selecciona un tipo</option>
+                        <option value="client">Cliente</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                    <span class="error-message" id="roleError"></span>
+                </div>
+                
+                <button type="submit" id="registerBtn">
+                    <span id="registerBtnText">Crear Cuenta</span>
+                    <span id="registerSpinner" class="spinner" style="display: none;">Creando...</span>
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+            </div>
+            
+            <div id="errorMessage" class="error-container" style="display: none;"></div>
+            <div id="successMessage" class="success-container" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

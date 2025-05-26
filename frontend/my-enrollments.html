@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="my-enrollments.css">
+    <title>Mis Inscripciones - Sistema de Clases</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <h1>Sistema de Clases</h1>
+            <div>
+                <a href="client-dashboard.html">Dashboard</a>
+                <a href="available-classes.html">Clases Disponibles</a>
+                <button onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <h2>Mis Inscripciones</h2>
+            <p>Gestiona tus inscripciones a clases</p>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div>
+            <button class="tab-button active" onclick="filterByStatus('all')">Todas</button>
+            <button class="tab-button" onclick="filterByStatus('active')">Activas</button>
+            <button class="tab-button" onclick="filterByStatus('completed')">Completadas</button>
+            <button class="tab-button" onclick="filterByStatus('cancelled')">Canceladas</button>
+        </div>
+
+        <!-- Summary Stats -->
+        <div>
+            <div>
+                <h3>Total Inscripciones</h3>
+                <p id="totalEnrollments">0</p>
+            </div>
+            <div>
+                <h3>Activas</h3>
+                <p id="activeEnrollments">0</p>
+            </div>
+            <div>
+                <h3>Completadas</h3>
+                <p id="completedEnrollments">0</p>
+            </div>
+            <div>
+                <h3>Próximas</h3>
+                <p id="upcomingEnrollments">0</p>
+            </div>
+        </div>
+
+        <!-- Enrollments List -->
+        <div>
+            <div id="enrollmentsContainer">
+                <!-- Dynamic content -->
+            </div>
+            <div id="loadingIndicator" style="display: none;">
+                <p>Cargando inscripciones...</p>
+            </div>
+            <div id="noEnrollments" style="display: none;">
+                <p>No tienes inscripciones.</p>
+                <button onclick="goToAvailableClasses()">Explorar Clases</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cancel Confirmation Modal -->
+    <div id="cancelModal" style="display: none;">
+        <div>
+            <div>
+                <h3>Cancelar Inscripción</h3>
+                <button onclick="closeCancelModal()">&times;</button>
+            </div>
+            <div id="cancelModalContent">
+                <!-- Dynamic content -->
+            </div>
+            <div>
+                <button onclick="closeCancelModal()">No, mantener</button>
+                <button id="confirmCancelBtn" onclick="confirmCancellation()">Sí, cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="my-enrollments.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="available-classes.css">
+    <title>Clases Disponibles - Sistema de Clases</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <h1>Sistema de Clases</h1>
+            <div>
+                <a href="client-dashboard.html">Dashboard</a>
+                <a href="my-enrollments.html">Mis Inscripciones</a>
+                <button onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <h2>Clases Disponibles</h2>
+            <p>Explora y inscríbete a las clases disponibles</p>
+        </header>
+
+        <!-- Filters -->
+        <div>
+            <h3>Filtros</h3>
+            <div>
+                <div>
+                    <label for="dateFilter">Fecha:</label>
+                    <input type="date" id="dateFilter" onchange="applyFilters()">
+                </div>
+                <div>
+                    <label for="statusFilter">Estado:</label>
+                    <select id="statusFilter" onchange="applyFilters()">
+                        <option value="">Todos</option>
+                        <option value="active">Activas</option>
+                        <option value="full">Llenas</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="searchFilter">Buscar:</label>
+                    <input type="text" id="searchFilter" placeholder="Nombre de clase..." oninput="applyFilters()">
+                </div>
+                <button onclick="clearFilters()">Limpiar Filtros</button>
+            </div>
+        </div>
+
+        <!-- Classes Grid -->
+        <div>
+            <div id="classesContainer">
+                <!-- Dynamic content -->
+            </div>
+            <div id="loadingIndicator" style="display: none;">
+                <p>Cargando clases...</p>
+            </div>
+            <div id="noResults" style="display: none;">
+                <p>No se encontraron clases que coincidan con los filtros.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollmentModal" style="display: none;">
+        <div>
+            <div>
+                <h3>Inscribirse a Clase</h3>
+                <button onclick="closeEnrollmentModal()">&times;</button>
+            </div>
+            <div id="modalContent">
+                <!-- Dynamic content -->
+            </div>
+            <div>
+                <button onclick="closeEnrollmentModal()">Cancelar</button>
+                <button id="confirmEnrollBtn" onclick="confirmEnrollment()">Inscribirse</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="available-classes.js"></script>
+</body>
+</html>

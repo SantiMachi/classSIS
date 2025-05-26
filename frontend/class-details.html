@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="class-details.css">
+    <title>Detalles de Clase - Sistema de Clases</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <h1>Sistema de Clases</h1>
+            <div>
+                <a href="client-dashboard.html">Dashboard</a>
+                <a href="available-classes.html">Clases Disponibles</a>
+                <a href="my-enrollments.html">Mis Inscripciones</a>
+                <button onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div id="loadingIndicator">
+            <p>Cargando detalles de la clase...</p>
+        </div>
+        
+        <div id="classDetails" style="display: none;">
+            <header>
+                <button onclick="goBack()">← Volver</button>
+                <div id="classHeader">
+                    <!-- Dynamic content -->
+                </div>
+            </header>
+
+            <div>
+                <!-- Class Information -->
+                <section>
+                    <h3>Información de la Clase</h3>
+                    <div id="classInfo">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+
+                <!-- Schedule Information -->
+                <section>
+                    <h3>Horario</h3>
+                    <div id="scheduleInfo">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+
+                <!-- Capacity Information -->
+                <section>
+                    <h3>Capacidad</h3>
+                    <div id="capacityInfo">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+
+                <!-- Instructor Information -->
+                <section>
+                    <h3>Instructor</h3>
+                    <div id="instructorInfo">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+
+                <!-- Enrollment Status -->
+                <section>
+                    <h3>Estado de Inscripción</h3>
+                    <div id="enrollmentStatus">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+
+                <!-- Actions -->
+                <section>
+                    <div id="classActions">
+                        <!-- Dynamic content -->
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div id="errorMessage" style="display: none;">
+            <h2>Error</h2>
+            <p>No se pudo cargar la información de la clase.</p>
+            <button onclick="goBack()">Volver</button>
+        </div>
+    </main>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollmentModal" style="display: none;">
+        <div>
+            <div>
+                <h3>Confirmar Inscripción</h3>
+                <button onclick="closeEnrollmentModal()">&times;</button>
+            </div>
+            <div id="enrollmentModalContent">
+                <!-- Dynamic content -->
+            </div>
+            <div>
+                <button onclick="closeEnrollmentModal()">Cancelar</button>
+                <button id="confirmEnrollBtn" onclick="confirmEnrollment()">Inscribirse</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="class-details.js"></script>
+</body>
+</html>

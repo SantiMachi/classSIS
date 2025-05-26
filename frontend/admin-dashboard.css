@@ -1,0 +1,497 @@
+/* ===== Estilos Generales ===== */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --light-color: #ecf0f1;
+  --dark-color: #34495e;
+  --border-radius: 6px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.admin-container {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  min-height: 100vh;
+}
+
+/* ===== Header ===== */
+.admin-header {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logout-btn {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ===== Navigation ===== */
+.admin-nav {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+
+.admin-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: var(--dark-color);
+  font-weight: 500;
+  transition: var(--transition);
+  border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* ===== Main Content ===== */
+.admin-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Dashboard Section ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.recent-activity {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+/* ===== Common Elements ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.create-btn {
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.create-btn:hover {
+  background-color: #219653;
+}
+
+.filters, .users-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+select {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* ===== Loading Overlay ===== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-spinner::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Message Container ===== */
+.message-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  max-width: 400px;
+}
+
+.message-container.success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.message-container.error {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .admin-nav ul {
+    flex-wrap: wrap;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filters, .users-filters {
+    flex-direction: column;
+  }
+}
+/* ===== Estilos para elementos dinámicos ===== */
+
+/* ----- Tarjetas de Clases ----- */
+.class-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.class-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.class-header h3 {
+  margin: 0;
+  color: var(--secondary-color);
+}
+
+.class-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-active {
+  background-color: rgba(39, 174, 96, 0.2);
+  color: var(--success-color);
+}
+
+.status-inactive {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: var(--danger-color);
+}
+
+.class-description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.class-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.class-details p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.class-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ----- Tablas ----- */
+.inscriptions-table, .users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.inscriptions-table th, 
+.users-table th {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1rem;
+  text-align: left;
+}
+
+.inscriptions-table td, 
+.users-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.inscriptions-table tr:last-child td, 
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+
+.inscriptions-table tr:hover, 
+.users-table tr:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+/* ----- Elementos de estado ----- */
+.status-enrolled {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.status-cancelled {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.role-admin {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.role-client {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+/* ----- Botones ----- */
+.edit-btn, .delete-btn, .view-btn, .cancel-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.edit-btn {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--primary-color);
+}
+
+.edit-btn:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.delete-btn {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--danger-color);
+}
+
+.delete-btn:hover {
+  background-color: rgba(231, 76, 60, 0.2);
+}
+
+.view-btn {
+  background-color: rgba(155, 89, 182, 0.1);
+  color: #9b59b6;
+}
+
+.view-btn:hover {
+  background-color: rgba(155, 89, 182, 0.2);
+}
+
+.cancel-btn {
+  background-color: rgba(241, 196, 15, 0.1);
+  color: #f1c40f;
+}
+
+.cancel-btn:hover {
+  background-color: rgba(241, 196, 15, 0.2);
+}
+
+/* ----- Actividad Reciente ----- */
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-message {
+  font-weight: 500;
+}
+
+.activity-time {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+/* ----- Mensajes ----- */
+.message-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.message-error {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.message-info {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* ----- Responsive para tablas ----- */
+@media (max-width: 768px) {
+  .inscriptions-table, .users-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .class-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .class-actions button {
+    width: 100%;
+  }
+}
